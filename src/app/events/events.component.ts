@@ -1,17 +1,26 @@
 import { Component, OnInit } from '@angular/core';
 import { Event } from './events.model';
+import { EventsService } from './events.service';
+
+
 @Component({
     moduleId: module.id,
     selector: 'app-events',
-    templateUrl: 'events.component.html'
+    templateUrl: 'events.component.html',
+    providers: [EventsService]
 })
 export class EventsComponent {
     eventsList: Event[];
     formVisible = false;
     selectedEvent: Event;
 
-    constructor() {
-        this.loadEvents();
+    constructor(private service: EventsService) {
+        this.downloadEvents();
+    }
+
+    downloadEvents() {
+        this.service.loadEvents()
+            .subscribe(arg => this.eventsList = arg);
     }
 
     showForm() {
