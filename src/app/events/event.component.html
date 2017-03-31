@@ -1,10 +1,25 @@
 <form novalidate>
-    <h2>Event </h2>
+    <h2>Event {{ event.name }}</h2>
+
+    <div class="form-group">
+        <label for="name">Name:</label>
+        <input id="name" #name="ngModel" name="name" [(ngModel)]="event.name" required type="text" class="form-control" placeholder="name" autofocus>
+        <div [hidden]="name.valid || name.pristine" class="alert alert-danger">
+            Occio...
+        </div>
+    </div>
+
+
     <button type="button" class="btn btn-primary">
         <span class="glyphicon glyphicon-ok"></span>
         Save</button>
-    <button type="button" class="btn btn-danger">
+    <button type="button" class="btn btn-danger" (click)="cancel()">
         <span class="glyphicon glyphicon-remove"></span>
         Cancel</button>
-</form>
 
+<pre>
+{{event|json}}
+
+</pre>
+
+</form>
